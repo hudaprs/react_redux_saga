@@ -1,13 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, checkTodo }) {
   return (
     <div className='todo-item'>
       <div>
-        <input type='checkbox' />
+        <input
+          type='checkbox'
+          onChange={() => checkTodo(todo)}
+          checked={todo.completed}
+        />
         <p
-          className={!todo.completed ? "" : "checked"}
+          className={todo.completed ? "checked" : ""}
           style={{ display: "inline-block", marginLeft: "10px" }}
         >
           {todo.title}
@@ -20,7 +24,8 @@ function TodoItem({ todo }) {
 }
 
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired
+  todo: PropTypes.object.isRequired,
+  checkTodo: PropTypes.func.isRequired
 }
 
 export default TodoItem

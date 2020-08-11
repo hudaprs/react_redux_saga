@@ -7,11 +7,13 @@ import {
   SET_TODO_TITLE,
   CREATE_TODO_TITLE,
   SET_NEW_TODO,
-  CLEAR_TODO_TITLE
+  CLEAR_TODO_TITLE,
+  CHECK_TODO,
+  SET_CHECK_TODO
 } from "../actions/todo-actions"
 
 // Api
-import { getAllTodos, createNewTodo } from "../api/todos"
+import { getAllTodos, createNewTodo, checkExistedTodo } from "../api/todos"
 
 /**
  * @note Every action that in the generator(*) must be use yield from react-saga
@@ -43,6 +45,13 @@ function* createTodo({ payload }) {
   yield put({ type: CLEAR_TODO_TITLE })
 }
 
+// Check the todo
+function* checkTodo({ payload }) {
+  const updatedTodo = yield call(checkExistedTodo, payload)
+
+  yield put({ type: CHECK_TODO, payload: updatedTodo })
+}
+
 function* deleteTodo(action) {
   // Call Delete Todo API
 
@@ -53,5 +62,6 @@ export function* todoSaga() {
   yield takeEvery(GET_TODOS, getTodos)
   yield takeEvery(CREATE_TODO_TITLE, setTodoTitle)
   yield takeEvery(SET_NEW_TODO, createTodo)
+  yield takeEvery(SET_CHECK_TODO, checkTodo)
   yield takeEvery(DELETE_TODO, deleteTodo)
 }

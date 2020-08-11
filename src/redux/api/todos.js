@@ -6,7 +6,7 @@ export const getAllTodos = async () => {
 
     return todos.data
   } catch (err) {
-    return console.log(err)
+    return console.err(err)
   }
 }
 
@@ -25,6 +25,19 @@ export const createNewTodo = async (title) => {
 
     return todo.data
   } catch (err) {
-    return console.log(err)
+    return console.err(err)
+  }
+}
+
+export const checkExistedTodo = async (todo) => {
+  try {
+    const updateTodo = await axios.patch(`todos/${todo.id}`, {
+      completed: !todo.completed
+    })
+
+    console.log(updateTodo.data)
+    return updateTodo.data
+  } catch (err) {
+    console.error(err)
   }
 }

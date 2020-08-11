@@ -8,9 +8,9 @@ import TodoForm from "./TodoForm"
 import TodoItem from "./TodoItem"
 
 // Actions
-import { GET_TODOS } from "../../redux/actions/todo-actions"
+import { GET_TODOS, SET_CHECK_TODO } from "../../redux/actions/todo-actions"
 
-function Todo({ todos, getTodos }) {
+function Todo({ todos, getTodos, checkTodo }) {
   useEffect(() => {
     getTodos()
 
@@ -22,7 +22,9 @@ function Todo({ todos, getTodos }) {
       <div className='mt-2 container'>
         <TodoForm />
         {todos &&
-          todos.map((todo, index) => <TodoItem todo={todo} key={index} />)}
+          todos.map((todo, index) => (
+            <TodoItem todo={todo} key={index} checkTodo={checkTodo} />
+          ))}
       </div>
     </MainLayout>
   )
@@ -41,7 +43,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTodos: () => dispatch({ type: GET_TODOS })
+    getTodos: () => dispatch({ type: GET_TODOS }),
+    checkTodo: (todo) => dispatch({ type: SET_CHECK_TODO, payload: todo })
   }
 }
 
