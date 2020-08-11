@@ -15,8 +15,7 @@ const initialState = {
   loading: false,
   todos: [],
   title: "",
-  current: null,
-  loading: false
+  current: null
 }
 
 export default (state = initialState, { type, payload }) => {
