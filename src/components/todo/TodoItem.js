@@ -1,9 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function TodoItem({ todo, checkTodo, deleteTodo }) {
+function TodoItem({ todo, checkTodo, deleteTodo, setCurrent }) {
   return (
-    <div className='todo-item'>
+    <div className='todo-item' onDoubleClick={() => setCurrent(todo)}>
       <div>
         <input
           type='checkbox'
@@ -26,7 +26,8 @@ function TodoItem({ todo, checkTodo, deleteTodo }) {
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
   checkTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired
+  deleteTodo: PropTypes.func.isRequired,
+  setCurrent: PropTypes.func.isRequired
 }
 
 export default TodoItem

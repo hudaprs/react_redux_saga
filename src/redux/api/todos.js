@@ -11,12 +11,6 @@ export const getAllTodos = async () => {
 }
 
 export const createNewTodo = async (title) => {
-  // Check the title
-  if (!title) {
-    alert("Please fill the forms!")
-    return
-  }
-
   try {
     const todo = await axios.post("todos", {
       title,
@@ -32,10 +26,11 @@ export const createNewTodo = async (title) => {
 export const checkExistedTodo = async (todo) => {
   try {
     const updateTodo = await axios.patch(`todos/${todo.id}`, {
+      id: todo.id,
+      title: todo.title,
       completed: !todo.completed
     })
 
-    console.log(updateTodo.data)
     return updateTodo.data
   } catch (err) {
     console.error(err)
@@ -52,5 +47,23 @@ export const deleteExistedTodo = async (id) => {
     } catch (err) {
       console.error(err)
     }
+  }
+}
+
+export const updateExistedTodo = async ({
+  title,
+  current: { id, completed }
+}) => {
+  // Confirm when update
+  try {
+    const updatedTodo = await axios.patch(`todos/${id}`, {
+      id,
+      title,
+      completed
+    })
+
+    return updatedTodo.data
+  } catch (err) {
+    console.error(err)
   }
 }

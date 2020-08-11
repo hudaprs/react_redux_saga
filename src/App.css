@@ -66,6 +66,11 @@ a {
   align-items: center;
   padding: 10px;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.todo-item:hover {
+  opacity: 0.8;
 }
 
 .todo-item .fas {
@@ -82,7 +87,6 @@ a {
 
 .form {
   display: flex;
-  margin-bottom: 20px;
 }
 
 .form input {
@@ -108,6 +112,14 @@ a {
 .btn:hover {
   background-color: #555;
   color: #fff;
+}
+
+.btn-clear {
+  background-color: #636e72;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

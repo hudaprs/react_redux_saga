@@ -1,53 +1,61 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
 
-// Actions
-import {
-  CREATE_TODO_TITLE,
-  SET_NEW_TODO
-} from "../../redux/actions/todo-actions"
-
-function TodoForm({ title, setTodotitle, createTodo }) {
+function TodoForm({
+  title,
+  current,
+  setTodotitle,
+  createTodo,
+  updateTodo,
+  clearCurrent
+}) {
   const onTodoSubmit = (e) => {
     e.preventDefault()
 
-    createTodo(title)
+    if (current) {
+      updateTodo({ title, current })
+    } else {
+      createTodo(title)
+    }
   }
 
   return (
-    <form className='form' onSubmit={onTodoSubmit}>
-      <input
-        type='text'
-        placeholder='What needs to be done...'
-        onChange={(e) => setTodotitle(e.target.value)}
-        value={title}
-      />
-      <button type='submit' className='btn'>
-        Save
-      </button>
-    </form>
+    <div className='mb-2'>
+      <form className='form' onSubmit={onTodoSubmit}>
+        <input
+          type='text'
+          placeholder='What needs to be done...'
+          onChange={(e) => setTodotitle(e.target.value)}
+          value={title}
+        />
+        <button type='submit' className='btn'>
+          {current ? "Update" : "Save"}
+        </button>
+      </form>
+      {current && (
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <button
+            type='button'
+            className='btn text-center btn-clear'
+            onClick={() => clearCurrent()}
+          >
+            Clear
+          </button>
+        </div>
+      )}
+    </div>
   )
 }
 
 TodoForm.propTypes = {
   title: PropTypes.string.isRequired,
+  current: PropTypes.object,
   setTodotitle: PropTypes.func.isRequired,
-  createTodo: PropTypes.func.isRequired
+  createTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  clearCurrent: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
-  return {
-    title: state.todo.title
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setTodotitle: (title) =>
-      dispatch({ type: CREATE_TODO_TITLE, payload: title }),
-    createTodo: (title) => dispatch({ type: SET_NEW_TODO, payload: title })
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
+export default TodoForm
