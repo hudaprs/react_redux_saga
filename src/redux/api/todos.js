@@ -41,3 +41,16 @@ export const checkExistedTodo = async (todo) => {
     console.error(err)
   }
 }
+
+export const deleteExistedTodo = async (id) => {
+  // Confirm when deleting
+  if (window.confirm("Delete todo?")) {
+    try {
+      await axios.delete(`todos/${id}`)
+
+      return id
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}

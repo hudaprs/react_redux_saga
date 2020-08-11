@@ -8,9 +8,13 @@ import TodoForm from "./TodoForm"
 import TodoItem from "./TodoItem"
 
 // Actions
-import { GET_TODOS, SET_CHECK_TODO } from "../../redux/actions/todo-actions"
+import {
+  GET_TODOS,
+  SET_CHECK_TODO,
+  SET_DELETE_TODO
+} from "../../redux/actions/todo-actions"
 
-function Todo({ todos, getTodos, checkTodo }) {
+function Todo({ todos, getTodos, checkTodo, deleteTodo }) {
   useEffect(() => {
     getTodos()
 
@@ -23,7 +27,12 @@ function Todo({ todos, getTodos, checkTodo }) {
         <TodoForm />
         {todos &&
           todos.map((todo, index) => (
-            <TodoItem todo={todo} key={index} checkTodo={checkTodo} />
+            <TodoItem
+              todo={todo}
+              key={index}
+              checkTodo={checkTodo}
+              deleteTodo={deleteTodo}
+            />
           ))}
       </div>
     </MainLayout>
@@ -32,7 +41,8 @@ function Todo({ todos, getTodos, checkTodo }) {
 
 Todo.propTypes = {
   todos: PropTypes.array.isRequired,
-  getTodos: PropTypes.func.isRequired
+  getTodos: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
@@ -44,7 +54,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getTodos: () => dispatch({ type: GET_TODOS }),
-    checkTodo: (todo) => dispatch({ type: SET_CHECK_TODO, payload: todo })
+    checkTodo: (todo) => dispatch({ type: SET_CHECK_TODO, payload: todo }),
+    deleteTodo: (id) => dispatch({ type: SET_DELETE_TODO, payload: id })
   }
 }
 

@@ -3,7 +3,8 @@ import {
   CREATE_TODO_TITLE,
   CREATE_TODO,
   CLEAR_TODO_TITLE,
-  CHECK_TODO
+  CHECK_TODO,
+  DELETE_TODO
 } from "../actions/todo-actions"
 
 const initialState = {
@@ -41,6 +42,11 @@ export default (state = initialState, { type, payload }) => {
         todos: state.todos.map((todo) =>
           todo.id === payload.id ? payload : todo
         )
+      }
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== payload)
       }
     default:
       return state

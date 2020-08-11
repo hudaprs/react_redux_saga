@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function TodoItem({ todo, checkTodo }) {
+function TodoItem({ todo, checkTodo, deleteTodo }) {
   return (
     <div className='todo-item'>
       <div>
@@ -18,14 +18,15 @@ function TodoItem({ todo, checkTodo }) {
         </p>
       </div>
 
-      <em className='fas fa-times'></em>
+      <em className='fas fa-times' onClick={() => deleteTodo(todo.id)}></em>
     </div>
   )
 }
 
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
-  checkTodo: PropTypes.func.isRequired
+  checkTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
 }
 
 export default TodoItem
