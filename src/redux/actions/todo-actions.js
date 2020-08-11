@@ -1,4 +1,8 @@
 export const GET_TODOS = "GET_TODOS"
 export const SET_TODOS = "SET_TODOS"
+export const SET_TODO_TITLE = "SET_TODO_TITLE"
+export const CREATE_TODO_TITLE = "CREATE_TODO_TITLE"
 export const CREATE_TODO = "CREATE_TODO"
+export const SET_NEW_TODO = "SET_NEW_TODO"
+export const CLEAR_TODO_TITLE = "CLEAR_TODO_TITLE"
 export const DELETE_TODO = "DELETE_TODO"
