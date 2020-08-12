@@ -2,7 +2,7 @@ import axios from "./default-axios"
 
 export const getAllTodos = async () => {
   try {
-    const todos = await axios.get("todos?_limit=10")
+    const todos = await axios.get(`todos?_limit=10`)
 
     return todos.data
   } catch (err) {

@@ -8,10 +8,10 @@ function Header() {
         <h3>Todo React Saga</h3>
         <ul className='nav-item'>
           <li className='nav-item-link'>
-            <Link to='#!'>Home</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li className='nav-item-link'>
-            <Link to='#!'>About</Link>
+            <Link to='/about'>About</Link>
           </li>
         </ul>
       </nav>

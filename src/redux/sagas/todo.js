@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects"
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
 import {
   GET_TODOS,
   CREATE_TODO,
@@ -39,7 +39,6 @@ import {
 function* getTodos() {
   yield put({ type: SET_LOADING })
 
-  // Call Get All Todos API
   const todos = yield call(getAllTodos)
 
   yield put({ type: SET_TODOS, payload: todos })
@@ -105,7 +104,7 @@ function* clearCurrent() {
 }
 
 export function* todoSaga() {
-  yield takeEvery(GET_TODOS, getTodos)
+  yield takeLatest(GET_TODOS, getTodos)
   yield takeEvery(CREATE_TODO_TITLE, setTodoTitle)
   yield takeEvery(SET_NEW_TODO, createTodo)
   yield takeEvery(SET_CHECK_TODO, checkTodo)

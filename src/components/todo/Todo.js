@@ -34,7 +34,7 @@ function Todo({
   clearCurrent
 }) {
   useEffect(() => {
-    getTodos()
+    getTodos(10)
 
     // eslint-disable-next-line
   }, [])
@@ -51,8 +51,11 @@ function Todo({
           clearCurrent={clearCurrent}
         />
 
-        {!loading &&
-          todos &&
+        {loading ? (
+          <div className='text-center mt-2'>
+            <span className='fas fa-circle-notch fa-spin fa-3x'></span>
+          </div>
+        ) : (
           todos.map((todo, index) => (
             <TodoItem
               todo={todo}
@@ -61,7 +64,8 @@ function Todo({
               deleteTodo={deleteTodo}
               setCurrent={setCurrent}
             />
-          ))}
+          ))
+        )}
       </div>
     </MainLayout>
   )

@@ -123,6 +123,10 @@ a {
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
   .navbar-container {
     align-items: center;
     justify-content: center;
