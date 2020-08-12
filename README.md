@@ -1,4 +1,4 @@
-# React Redux with React Saga
+# React With Redux Saga
 
 An todo app with react redux and react saga, the next level of redux middleware xD
 
